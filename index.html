@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Pensión — Harold Augusto Marín Machado</title>
+  <meta name="description" content="Resumen pensional personal de Harold Augusto Marín Machado en Colpensiones. Historia laboral, semanas cotizadas y proyección de mesada.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.2.0/dist/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f4f0;
+      --surface-1: #ffffff;
+      --surface-0: #eeede8;
+      --border: rgba(11,11,11,0.10);
+      --border-strong: rgba(11,11,11,0.18);
+      --text-primary: #0b0b0b;
+      --text-secondary: #52514e;
+      --text-muted: #898781;
+      --text-accent: #185fa5;
+      --text-success: #0f6e56;
+      --text-warning: #854f0b;
+      --bg-accent: #e6f1fb;
+      --bg-success: #e1f5ee;
+      --bg-warning: #faeeda;
+      --border-accent: #b5d4f4;
+      --border-success: #9fe1cb;
+      --radius: 8px;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121211;
+        --surface-1: #1e1e1c;
+        --surface-0: #171716;
+        --border: rgba(255,255,255,0.10);
+        --border-strong: rgba(255,255,255,0.18);
+        --text-primary: #f0efe8;
+        --text-secondary: #b0ae a6;
+        --text-muted: #6e6d69;
+        --text-accent: #3987e5;
+        --text-success: #1d9e75;
+        --text-warning: #ef9f27;
+        --bg-accent: #0c447c22;
+        --bg-success: #08504122;
+        --bg-warning: #63380622;
+        --border-accent: #185fa544;
+        --border-success: #0f6e5644;
+      }
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--surface-1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1rem;
+      border: 0.5px solid var(--border);
+    }
+
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--bg-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-accent);
+      flex-shrink: 0;
+      border: 0.5px solid var(--border-accent);
+    }
+
+    .header-info h1 {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .header-info p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--bg-success);
+      color: var(--text-success);
+      border: 0.5px solid var(--border-success);
+      margin-top: 5px;
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 1.5rem 0 8px;
+    }
+
+    /* KPI GRID */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
+    }
+
+    .kpi {
+      background: var(--surface-1);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      border: 0.5px solid var(--border);
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .kpi-label i { font-size: 13px; }
+
+    .kpi-value {
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+
+    .kpi.accent .kpi-value { color: var(--text-accent); }
+    .kpi.success .kpi-value { color: var(--text-success); }
+    .kpi.warning .kpi-value { color: var(--text-warning); }
+
+    /* PROGRESS CARD */
+    .card {
+      background: var(--surface-1);
+      border-radius: 12px;
+      padding: 1.25rem;
+      border: 0.5px solid var(--border);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .progress-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .progress-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .progress-pct {
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .bar-wrap {
+      background: var(--surface-0);
+      border-radius: 6px;
+      height: 10px;
+      overflow: hidden;
+      margin-bottom: 5px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      width: 0%;
+      transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .bar-mid { font-weight: 500; }
+
+    .divider { border: none; border-top: 0.5px solid var(--border); margin: 1rem 0; }
+
+    /* CHECKLIST */
+    .checklist { display: flex; flex-direction: column; gap: 8px; }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface-1);
+      border-radius: var(--radius);
+      padding: 13px 15px;
+      border: 0.5px solid var(--border);
+    }
+
+    .check-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 15px;
+    }
+
+    .check-icon.ok { background: var(--bg-success); color: var(--text-success); }
+    .check-icon.pending { background: var(--bg-warning); color: var(--text-warning); }
+
+    .check-text strong {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      display: block;
+    }
+
+    .check-text span {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+
+    .tl-item {
+      display: flex;
+      gap: 12px;
+      padding-bottom: 16px;
+      position: relative;
+    }
+
+    .tl-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 30px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border-strong);
+    }
+
+    .tl-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 13px;
+      z-index: 1;
+    }
+
+    .tl-dot.done { background: var(--bg-success); color: var(--text-success); }
+    .tl-dot.now { background: var(--bg-accent); color: var(--text-accent); border: 1.5px solid var(--border-accent); }
+    .tl-dot.future { background: var(--surface-0); color: var(--text-muted); border: 0.5px solid var(--border-strong); }
+
+    .tl-content { padding-top: 2px; }
+    .tl-content strong { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+    .tl-content p { font-size: 12px; color: var(--text-secondary); margin-top: 2px; line-height: 1.5; }
+
+    /* MESADA */
+    .mesada-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .mesada-label { font-size: 12px; color: var(--text-muted); margin-bottom: 3px; }
+    .mesada-range { font-size: 26px; font-weight: 500; color: var(--text-accent); }
+    .mesada-rate { font-size: 22px; font-weight: 500; color: var(--text-success); text-align: right; }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 0.5px solid var(--border);
+      font-size: 13px;
+      gap: 8px;
+    }
+
+    .detail-row:last-child { border-bottom: none; }
+    .dk { color: var(--text-secondary); flex-shrink: 0; }
+    .dv { color: var(--text-primary); font-weight: 500; text-align: right; }
+    .dv.green { color: var(--text-success); }
+
+    /* TIP */
+    .tip {
+      background: var(--bg-accent);
+      border: 0.5px solid var(--border-accent);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .tip i { color: var(--text-accent); font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+    .tip p { font-size: 13px; color: var(--text-accent); line-height: 1.6; }
+    .tip a { color: var(--text-accent); font-weight: 500; }
+
+    /* BUTTONS */
+    .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .btn {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      padding: 9px 16px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      border: 0.5px solid var(--border-strong);
+      background: var(--surface-1);
+      color: var(--text-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .btn:hover { background: var(--surface-0); }
+    .btn.primary { background: var(--bg-accent); color: var(--text-accent); border-color: var(--border-accent); }
+    .btn.primary:hover { background: #d1e7f8; }
+
+    /* FOOTER */
+    .footer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 0.5px solid var(--border);
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 480px) {
+      body { padding: 1rem 0.75rem; }
+      .header { flex-wrap: wrap; }
+      .mesada-top { flex-direction: column; }
+      .mesada-rate { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="avatar">HA</div>
+      <div class="header-info">
+        <h1>Harold Augusto Marín Machado</h1>
+        <p>C.C. 4712484 · Colpensiones · Actualizado jun 2026</p>
+        <span class="status-badge">
+          <i class="ti ti-circle-check" aria-hidden="true"></i> Activo cotizante
+        </span>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="section-title">resumen de cotización</div>
+    <div class="kpi-grid">
+      <div class="kpi success">
+        <div class="kpi-label"><i class="ti ti-calendar-stats" aria-hidden="true"></i> Semanas cotizadas</div>
+        <div class="kpi-value">1.938</div>
+        <div class="kpi-sub">de 1.300 requeridas</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label"><i class="ti ti-clock" aria-hidden="true"></i> Años cotizados</div>
+        <div class="kpi-value">~37</div>
+        <div class="kpi-sub">desde agosto 1987</div>
+      </div>
+      <div class="kpi accent">
+        <div class="kpi-label"><i class="ti ti-trending-up" aria-hidden="true"></i> Semanas extra</div>
+        <div class="kpi-value">+638</div>
+        <div class="kpi-sub">sobre el mínimo</div>
+      </div>
+      <div class="kpi warning">
+        <div class="kpi-label"><i class="ti ti-user" aria-hidden="true"></i> Edad actual</div>
+        <div class="kpi-value">60</div>
+        <div class="kpi-sub">cumple 62 en oct 2027</div>
+      </div>
+    </div>
+
+    <!-- PROGRESO -->
+    <div class="section-title">progreso hacia la pensión</div>
+    <div class="card">
+      <div class="progress-header">
+        <div>
+          <div class="progress-title">Semanas cotizadas</div>
+          <div class="progress-sub">Meta mínima: 1.300 semanas</div>
+        </div>
+        <div class="progress-pct" style="color: var(--text-success);">149%</div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-fill" id="bar-semanas" style="background: #1baf7a;"></div>
+      </div>
+      <div class="bar-labels">
+        <span>0</span>
+        <span class="bar-mid" style="color: var(--text-success);">1.938 / 1.300 ✓</span>
+        <span>2.000</span>
+      </div>
+
+      <hr class="divider">
+
+      <div class="progress-header">
+        <div>
+          <div class="progress-title">Edad cumplida</div>
+          <div class="progress-sub">Meta: 62 años (27 oct 2027)</div>
+        </div>
+        <div class="progress-pct" style="color: var(--text-warning);">97%</div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-fill" id="bar-edad" style="background: #eda100;"></div>
+      </div>
+      <div class="bar-labels">
+        <span>0</span>
+        <span class="bar-mid" style="color: var(--text-warning);">60 años · faltan ~16 meses</span>
+        <span>62</span>
+      </div>
+    </div>
+
+    <!-- REQUISITOS -->
+    <div class="section-title">requisitos de pensión</div>
+    <div class="checklist">
+      <div class="check-item">
+        <div class="check-icon ok"><i class="ti ti-check" aria-hidden="true"></i></div>
+        <div class="check-text">
+          <strong>Semanas cotizadas</strong>
+          <span>Necesitas 1.300 · Tienes 1.938 · Superado por 638 semanas</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon pending"><i class="ti ti-clock" aria-hidden="true"></i></div>
+        <div class="check-text">
+          <strong>Edad mínima: 62 años</strong>
+          <span>Tienes 60 años · Faltan ~16 meses · Cumples el 27 de octubre de 2027</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="section-title">línea de tiempo</div>
+    <div class="card">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div>
+          <div class="tl-content">
+            <strong>Agosto 1987 — Inicio de cotización</strong>
+            <p>Primera semana cotizada con Restrepo Arango Limitada. Afiliación al sistema.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div>
+          <div class="tl-content">
+            <strong>Marzo 1990 — Distrileco Caucasia</strong>
+            <p>Inicio con Distrileco, empleador principal hasta hoy. Más de 36 años ininterrumpidos.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div>
+          <div class="tl-content">
+            <strong>Enero 1995 — Traslado a Colpensiones</strong>
+            <p>Aportes trasladados desde régimen de ahorro individual (RAIS) a prima media.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div>
+          <div class="tl-content">
+            <strong>~2014 — Semana 1.300 completada</strong>
+            <p>Cumpliste el requisito mínimo de semanas con años de anticipación.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot now"><i class="ti ti-map-pin" aria-hidden="true"></i></div>
+          <div class="tl-content">
+            <strong>Junio 2026 — Hoy</strong>
+            <p>60 años · 1.938 semanas · Activo cotizante en Distrileco Caucasia S.A.S.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot future"><i class="ti ti-star" aria-hidden="true"></i></div>
+          <div class="tl-content">
+            <strong>27 octubre 2027 — Cumples 62 años</strong>
+            <p>Puedes solicitar el reconocimiento pensional ante Colpensiones. Tendrás ~1.990 semanas.</p>
+          </div>
+        </div>
+        <div class="tl-item" style="padding-bottom: 0;">
+          <div class="tl-dot future"><i class="ti ti-coin" aria-hidden="true"></i></div>
+          <div class="tl-content">
+            <strong>Inicio de mesada pensional</strong>
+            <p>Aproximadamente 2–4 meses después de radicar la solicitud en Colpensiones.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MESADA -->
+    <div class="section-title">mesada pensional estimada</div>
+    <div class="card">
+      <div class="mesada-top">
+        <div>
+          <div class="mesada-label">Rango estimado mensual</div>
+          <div class="mesada-range">$4.800.000 – $5.200.000</div>
+        </div>
+        <div>
+          <div class="mesada-label" style="text-align: right;">Tasa de reemplazo</div>
+          <div class="mesada-rate">~80%</div>
+          <div style="font-size: 11px; color: var(--text-muted); text-align: right;">tope máximo legal</div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <span class="dk">IBL estimado (últimos 10 años, indexado)</span>
+        <span class="dv">~$6.000.000 – $6.500.000</span>
+      </div>
+      <div class="detail-row">
+        <span class="dk">Semanas adicionales sobre 1.300</span>
+        <span class="dv green">+638 semanas</span>
+      </div>
+      <div class="detail-row">
+        <span class="dk">Incremento por semanas extra</span>
+        <span class="dv green">+19,1% (12,7 bloques de 50 sem.)</span>
+      </div>
+      <div class="detail-row">
+        <span class="dk">Tasa de reemplazo base (1.300 sem.)</span>
+        <span class="dv">~65% del IBL</span>
+      </div>
+      <div class="detail-row">
+        <span class="dk">Tasa final aplicada (tope 80%)</span>
+        <span class="dv green">80% del IBL</span>
+      </div>
+      <div class="detail-row">
+        <span class="dk">Salario mínimo legal 2026</span>
+        <span class="dv">$1.750.905</span>
+      </div>
+      <div class="detail-row">
+        <span class="dk">Mínimo garantizado (no puede ser menor)</span>
+        <span class="dv">1 SMLMV ($1.750.905)</span>
+      </div>
+    </div>
+
+    <!-- AVISO -->
+    <div class="tip" style="margin-top: 1rem;">
+      <i class="ti ti-info-circle" aria-hidden="true"></i>
+      <p>El IBL definitivo lo calcula Colpensiones indexando cada salario con el IPC histórico del DANE. El valor real puede variar. Solicita una proyección oficial en <a href="https://sede.colpensiones.gov.co" target="_blank" rel="noopener">sede.colpensiones.gov.co</a> o agenda cita en un PAC.</p>
+    </div>
+
+    <!-- ACCIONES -->
+    <div class="section-title" style="margin-top: 1.5rem;">próximos pasos</div>
+    <div class="btn-row">
+      <a class="btn primary" href="https://sede.colpensiones.gov.co" target="_blank" rel="noopener">
+        <i class="ti ti-external-link" aria-hidden="true"></i> Sede Colpensiones
+      </a>
+      <a class="btn" href="https://wa.me/576015979797" target="_blank" rel="noopener">
+        <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> WhatsApp Colpensiones
+      </a>
+      <a class="btn" href="tel:016000656500">
+        <i class="ti ti-phone" aria-hidden="true"></i> Línea 01-8000-656-500
+      </a>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      Desarrollada por Vibras Positivas HM — Derechos de Autor Reservados<br>
+      Datos tomados del reporte Colpensiones · Actualizado 26 jun 2026
+    </div>
+
+  </div>
+
+  <script>
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        var b1 = document.getElementById('bar-semanas');
+        var b2 = document.getElementById('bar-edad');
+        if (b1) b1.style.width = '96.9%';
+        if (b2) b2.style.width = '96.8%';
+      }, 400);
+    });
+  </script>
+</body>
+</html>
